@@ -25,13 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>playerControlled = 0;   //is this an enemy(ai) = 0, or a player =1
-myTurn = 0;             //can I currently play, no = 0, 1 = yes
+            <string>playerControlled = false;   //is this an enemy(ai) = 0, or a player =1
+myTurn = false;             //can I currently play, no = 0, 1 = yes
 state = 0;              //used in ____StateMachine (player or enemy)
+turnTimer = 0;          //used in gameOrder(), if 100, my turn;
 
 //controls stuff
 steps = 0;              //steps a player can take on their turn
-abilityUsed = 0;
+abilityUsed = false;
 
 //creature stats
 heroHealth = 0;         //maxHealth of hero
@@ -100,7 +101,11 @@ if(myTurn){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_sprite(sprite_index, 0, floor(x), floor(y));
+            <string>if(myTurn == 1){
+    draw_sprite(sprite_index, 0, floor(x), floor(y));
+}else{
+    draw_sprite(sprPlayer, 0, floor(x), floor(y));
+}
 
 </string>
           </argument>

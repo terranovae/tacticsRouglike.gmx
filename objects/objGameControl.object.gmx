@@ -29,10 +29,12 @@
 //create empty map
 mapSize = 30;
 gameMap = ds_grid_create(mapSize, mapSize);
+heroList = ds_list_create();
+heroOrderList = ds_list_create();
 mapGen();
 //general game data
 turnOrder = 0;
-heroOrder = ds_grid_create(1,0); //width: 0 = objectID, 1 = object Turn Value
+//heroOrder = ds_grid_create(1,0); //width: 0 = objectID, 1 = object Turn Value
 
 </string>
           </argument>
@@ -56,7 +58,66 @@ heroOrder = ds_grid_create(1,0); //width: 0 = objectID, 1 = object Turn Value
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>//gameOrder();
+
+if(ds_list_size(heroList) &gt; 0){ 
+//show_debug_message("object : " + string(heroList[| turnOrder])); 
+    
+    if(turnOrder &gt;= ds_list_size(heroList)) turnOrder = 0;
+    if(heroList[| turnOrder].myTurn == 0){
+        heroList[| turnOrder].turnTimer += heroList[| turnOrder].heroAgility;
+        if(heroList[| turnOrder].turnTimer &gt;= 100){
+            heroList[| turnOrder].myTurn = true;
+        }else{
+            turnOrder++;
+        }
+    
+    
+    
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+draw_set_color(c_white);
+
+
+
+boxSize = 120;  //heroOrder List
+//show list of heroObjects/stats
+/*for(i = 0; i &lt; (ds_list_size(heroList));i++){
+    if(ds_list_size(heroList) &gt;0) 
+        draw_text(24, 20 * i, "timer" + string(heroList[| i].turnTimer) + 
+        " steps : " + string(heroList[| i].steps));
+}*/
+for(j = 0;j&lt;4;j++){
+    draw_set_color(c_white);
+    draw_rectangle(1024 - (boxSize * (j+1)), 0, 1024 - (boxSize * (j)), boxSize, false);
+    draw_set_color(c_black);
+    draw_rectangle(1024 - (boxSize * (j+1)), 0, 1024 - (boxSize * (j)), boxSize, true);
+    draw_text(1024 - (boxSize * (j+1)), 28,  string(heroOrderList[| j]));
+}
+</string>
           </argument>
         </arguments>
       </action>

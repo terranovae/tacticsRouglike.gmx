@@ -26,11 +26,15 @@
       <script>scripts\playerMovement.gml</script>
     </scripts>
     <script>scripts\enemyStateMachine.gml</script>
+    <script>scripts\gameOrder.gml</script>
+    <script>scripts\orderHeroes.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fntBasic</font>
+  </fonts>
   <objects name="objects">
     <object>objects\objGameControl</object>
     <object>objects\objBasicHero</object>
-    <object>objects\objPlayer</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
